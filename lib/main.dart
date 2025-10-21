@@ -17,7 +17,7 @@ void main() async {
     ),
     anonKey: const String.fromEnvironment(
       'SUPABASE_ANON_KEY',
-      defaultValue: '<anon-key>',
+      defaultValue: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0cG9zdmhndW1vc2x2eGduZGZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEwODI4NzMsImV4cCI6MjA3NjY1ODg3M30.LA7E9KhYeusZDk4wlK7yZbHSzefnQcBMYYE_fNXC8CY',
     ),
   );
 
