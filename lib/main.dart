@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'tokensecurestorage.dart'; // Importe a página do token
-import 'sqlitetasks.dart'; // Importe a página do SQLite
-import 'firebasefirestone.dart'; // Adicione este import
+import 'tokensecurestorage.dart';
+import 'sqlitetasks.dart';
+import 'firebasefirestone.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'listaprodutos.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializa Supabase (se ainda for necessário)
   await Supabase.initialize(
-    url: 'https://itposvhgumoslvxgndfn.supabase.co', // substitua
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0cG9zdmhndW1vc2x2eGduZGZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEwODI4NzMsImV4cCI6MjA3NjY1ODg3M30.LA7E9KhYeusZDk4wlK7yZbHSzefnQcBMYYE_fNXC8CY', // substitua
+    url: const String.fromEnvironment(
+      'SUPABASE_URL',
+      defaultValue: 'https://itposvhgumoslvxgndfn.supabase.co',
+    ),
+    anonKey: const String.fromEnvironment(
+      'SUPABASE_ANON_KEY',
+      defaultValue: '<anon-key>',
+    ),
   );
+
   final prefs = await SharedPreferences.getInstance();
   final isDark = prefs.getBool('darkMode') ?? false;
   runApp(MyApp(isDark: isDark));
@@ -131,7 +140,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const FirebaseFirestoreRegisterPage()),
+                  MaterialPageRoute(
+                    builder: (_) => const FirebaseFirestoreRegisterPage(),
+                  ),
                 );
               },
               child: const Text('Ir para Cadastro Firebase Firestore'),
